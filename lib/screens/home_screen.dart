@@ -17,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: const Text('Notes App'),
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
@@ -32,7 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
             Navigator.push(
               context,
@@ -41,7 +42,8 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             );
           },
-          child: const Icon(Icons.add),
+          label: const Text('Add Note'),
+          icon: const Icon(Icons.add),
         ),
       body: Consumer<NoteProvider>(
         builder: (context, value, child) {
