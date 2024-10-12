@@ -67,29 +67,36 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           }
 
-          return ListView.builder(
-            itemCount: filteredNotes.length,
-            itemBuilder: (context, index) {
-              final note = filteredNotes[index];
+          return Padding(
+            padding: const EdgeInsets.all(16),
+            child: GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+              ),
+              itemCount: filteredNotes.length,
+              itemBuilder: (context, index) {
+                final note = filteredNotes[index];
 
-              return ListTile(
-                title: Text(note.title),
-                subtitle: Text(note.content),
-                trailing: IconButton(
-                  icon: const Icon(Icons.delete),
-                  onPressed: () {
-                    value.removeNote(note);
-                  },
-                ),
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ManageNoteScreen(),
-                    settings: RouteSettings(arguments: note),
+                return Card(
+                  child: ListTile(
+                    title: Text(
+                      note.title,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    subtitle: Text(note.content),
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ManageNoteScreen(),
+                        settings: RouteSettings(arguments: note),
+                      ),
+                    ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           );
         },
       ),
@@ -139,14 +146,13 @@ class NoteSearchDelegate extends SearchDelegate {
         final note = notes[index];
 
         return ListTile(
-          title: Text(note.title),
-          subtitle: Text(note.content),
-          trailing: IconButton(
-            icon: const Icon(Icons.delete),
-            onPressed: () {
-              _noteProvider.removeNote(note);
-            },
+          title: Text(
+            note.title,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
           ),
+          subtitle: Text(note.content),
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(
@@ -174,14 +180,13 @@ class NoteSearchDelegate extends SearchDelegate {
         final note = notes[index];
 
         return ListTile(
-          title: Text(note.title),
-          subtitle: Text(note.content),
-          trailing: IconButton(
-            icon: const Icon(Icons.delete),
-            onPressed: () {
-              _noteProvider.removeNote(note);
-            },
+          title: Text(
+            note.title,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
           ),
+          subtitle: Text(note.content),
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(
@@ -194,5 +199,4 @@ class NoteSearchDelegate extends SearchDelegate {
     );
   }
 }
-
 

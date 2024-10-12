@@ -23,6 +23,17 @@ class ManageNoteScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(isEdit ? 'Edit Note' : 'Add Note'),
+        actions: isEdit
+          ? [
+              IconButton(
+                icon: const Icon(Icons.delete),
+                onPressed: () {
+                  context.read<NoteProvider>().removeNote(existingNote);
+                  Navigator.pop(context);
+                },
+              )
+            ]
+          : null,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -42,6 +53,11 @@ class ManageNoteScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
+              style: (
+                ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black
+                )
+              ),
               onPressed: () {
                 final title = titleController.text;
                 final content = contentController.text;
@@ -65,7 +81,7 @@ class ManageNoteScreen extends StatelessWidget {
 
                 Navigator.pop(context);
               },
-              child: const Text('Save'),
+              child: const Text('Save', style: TextStyle(color: Colors.white),),
             )
           ],
         )
@@ -73,5 +89,4 @@ class ManageNoteScreen extends StatelessWidget {
     );
   }
 }
-
 
