@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -40,13 +41,13 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
           ],
-          bottom: const TabBar(
+          bottom: TabBar(
             indicatorColor: Colors.black,
             tabs: [
               Tab(
                 child: Text(
                   'All Notes',
-                  style: TextStyle(
+                  style: GoogleFonts.poppins(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
@@ -56,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Tab(
                 child: Text(
                   'Folders',
-                  style: TextStyle(
+                  style: GoogleFonts.poppins(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
@@ -73,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
+                CupertinoPageRoute(
                   builder: (context) => const ManageNoteScreen(),
                 ),
               );
@@ -107,8 +108,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         .toList();
 
                 if (filteredNotes.isEmpty) {
-                  return const Center(
-                    child: Text('No notes found'),
+                  return Center(
+                    child: Text(
+                      'No notes found',
+                      style: GoogleFonts.poppins(),
+                    ),
                   );
                 }
                 return Padding(
@@ -138,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           onTap: () => Navigator.push(
                             context,
-                            MaterialPageRoute(
+                            CupertinoPageRoute(
                               builder: (context) => const ManageNoteScreen(),
                               settings: RouteSettings(arguments: note),
                             ),
@@ -150,8 +154,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               },
             ),
-            const Center(
-              child: Text('Folders'),
+            Center(
+              child: Text(
+                'No folders found',
+                style: GoogleFonts.poppins(),
+              ),
             ),
           ],
         ),
@@ -217,7 +224,7 @@ class NoteSearchDelegate extends SearchDelegate {
           ),
           onTap: () => Navigator.push(
             context,
-            MaterialPageRoute(
+            CupertinoPageRoute(
               builder: (context) => const ManageNoteScreen(),
               settings: RouteSettings(arguments: note),
             ),
@@ -257,7 +264,7 @@ class NoteSearchDelegate extends SearchDelegate {
           ),
           onTap: () => Navigator.push(
             context,
-            MaterialPageRoute(
+            CupertinoPageRoute(
               builder: (context) => const ManageNoteScreen(),
               settings: RouteSettings(arguments: note),
             ),
@@ -267,4 +274,3 @@ class NoteSearchDelegate extends SearchDelegate {
     );
   }
 }
-
