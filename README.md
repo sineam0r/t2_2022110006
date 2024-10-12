@@ -1,7 +1,12 @@
 # t2_2022110006
+template: https://dribbble.com/shots/15602193-Notes-App-Mobile-Concept
 
-A new Flutter project.
 
+screenshot:
+<img src="notes.jpg"></img>
+<img src="AddNote.jpg"></img>
+<img src="EditNote.jpg"></img>
+<img src="folders.jpg"></img>
 ## Getting Started
 
 This project is a starting point for a Flutter application.
