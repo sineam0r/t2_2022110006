@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:t2_2022110006/providers/note_provider.dart';
 import 'package:t2_2022110006/screens/manage_note_screen.dart';
@@ -17,7 +18,13 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Notes App'),
+        title: Text(
+          'Notes App',
+          style: GoogleFonts.poppins(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
@@ -44,8 +51,17 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             );
           },
-          label: const Text('Add New Note', style: TextStyle(color: Colors.white),),
-          icon: const Icon(Icons.add, color: Colors.white,),
+          label: Text(
+            'Add New Note',
+            style: GoogleFonts.poppins(
+              color: Colors.white,
+              fontSize: 18,
+            ),
+          ),
+          icon: const Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
           backgroundColor: Colors.black,
         ),
       ),
@@ -66,7 +82,6 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Text('No notes found'),
             );
           }
-
           return Padding(
             padding: const EdgeInsets.all(16),
             child: GridView.builder(
@@ -81,11 +96,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: ListTile(
                     title: Text(
                       note.title,
-                      style: const TextStyle(
+                      style: GoogleFonts.poppins(
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    subtitle: Text(note.content),
+                    subtitle: Text(
+                      note.content,
+                      style: GoogleFonts.poppins(
+                        fontSize: 16,
+                      ),
+                    ),
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -148,11 +169,17 @@ class NoteSearchDelegate extends SearchDelegate {
         return ListTile(
           title: Text(
             note.title,
-            style: const TextStyle(
+            style: GoogleFonts.poppins(
+              fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
           ),
-          subtitle: Text(note.content),
+          subtitle: Text(
+            note.content,
+            style: GoogleFonts.poppins(
+              fontSize: 16,
+            ),
+          ),
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(
@@ -182,11 +209,17 @@ class NoteSearchDelegate extends SearchDelegate {
         return ListTile(
           title: Text(
             note.title,
-            style: const TextStyle(
+            style: GoogleFonts.poppins(
+              fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
           ),
-          subtitle: Text(note.content),
+          subtitle: Text(
+            note.content,
+            style: GoogleFonts.poppins(
+              fontSize: 16,
+            ),
+          ),
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(
@@ -199,4 +232,5 @@ class NoteSearchDelegate extends SearchDelegate {
     );
   }
 }
+
 

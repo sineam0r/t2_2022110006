@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:t2_2022110006/models/note.dart';
 import 'package:t2_2022110006/providers/note_provider.dart';
@@ -22,7 +23,13 @@ class ManageNoteScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(isEdit ? 'Edit Note' : 'Add Note'),
+        title: Text(
+          isEdit ? 'Edit Note' : 'Add Note',
+          style: GoogleFonts.poppins(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         actions: isEdit
           ? [
               IconButton(
@@ -41,22 +48,42 @@ class ManageNoteScreen extends StatelessWidget {
           children: [
             TextField(
               controller: titleController,
-              decoration: const InputDecoration(
-                labelText: 'Title'
+              decoration: InputDecoration(
+                labelText: 'Title',
+                labelStyle: GoogleFonts.poppins(
+                  fontSize: 18,
+                  color: Colors.black,
+                ),
+                focusedBorder: const UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+              ),
+              style: GoogleFonts.poppins(
+                fontSize: 18,
+                color: Colors.black,
               ),
             ),
             TextField(
               controller: contentController,
-              decoration: const InputDecoration(
-                labelText: 'Content'
+              decoration: InputDecoration(
+                labelText: 'Content',
+                labelStyle: GoogleFonts.poppins(
+                  fontSize: 18,
+                  color: Colors.black,
+                ),
+                focusedBorder: const UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+              ),
+              style: GoogleFonts.poppins(
+                fontSize: 18,
+                color: Colors.black,
               ),
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              style: (
-                ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black
-                )
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black
               ),
               onPressed: () {
                 final title = titleController.text;
@@ -81,10 +108,16 @@ class ManageNoteScreen extends StatelessWidget {
 
                 Navigator.pop(context);
               },
-              child: const Text('Save', style: TextStyle(color: Colors.white),),
+              child: Text(
+                'Save',
+                style: GoogleFonts.poppins(
+                  fontSize: 18,
+                  color: Colors.white,
+                ),
+              ),
             )
           ],
-        )
+        ),
       ),
     );
   }
