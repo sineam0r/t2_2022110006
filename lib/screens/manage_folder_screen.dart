@@ -76,7 +76,7 @@ class ManageFolderScreen extends StatelessWidget {
                 if (isEdit) {
                   context.read<NoteProvider>().editFolder(
                     Folder(
-                      id: existingFolder!.id,
+                      id: existingFolder.id,
                       name: name,
                       notes: existingFolder.notes,
                     ),
