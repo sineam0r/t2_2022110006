@@ -46,6 +46,10 @@ class ManageNoteScreen extends StatelessWidget {
                 final title = titleController.text;
                 final content = contentController.text;
 
+                if (title.isEmpty || content.isEmpty) {
+                  return;
+                }
+
                 final newNote = Note(
                   id: isEdit
                     ? existingNote.id
@@ -69,3 +73,5 @@ class ManageNoteScreen extends StatelessWidget {
     );
   }
 }
+
+

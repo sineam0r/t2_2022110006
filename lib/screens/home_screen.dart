@@ -33,7 +33,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton.extended(
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 16),
+        child: FloatingActionButton.extended(
           onPressed: () {
             Navigator.push(
               context,
@@ -42,9 +44,11 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             );
           },
-          label: const Text('Add Note'),
-          icon: const Icon(Icons.add),
+          label: const Text('Add New Note', style: TextStyle(color: Colors.white),),
+          icon: const Icon(Icons.add, color: Colors.white,),
+          backgroundColor: Colors.black,
         ),
+      ),
       body: Consumer<NoteProvider>(
         builder: (context, value, child) {
           final notes = value.notes;
@@ -190,4 +194,5 @@ class NoteSearchDelegate extends SearchDelegate {
     );
   }
 }
+
 
