@@ -16,110 +16,145 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Notes App',
-          style: GoogleFonts.poppins(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {
-              showSearch(
-                context: context,
-                delegate: NoteSearchDelegate(
-                  Provider.of<NoteProvider>(context, listen: false),
-                ),
-              );
-            },
-          ),
-        ],
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 16),
-        child: FloatingActionButton.extended(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const ManageNoteScreen(),
-              ),
-            );
-          },
-          label: Text(
-            'Add New Note',
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'Notes App',
             style: GoogleFonts.poppins(
-              color: Colors.white,
-              fontSize: 18,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
             ),
           ),
-          icon: const Icon(
-            Icons.add,
-            color: Colors.white,
-          ),
-          backgroundColor: Colors.black,
-        ),
-      ),
-      body: Consumer<NoteProvider>(
-        builder: (context, value, child) {
-          final notes = value.notes;
-          final filteredNotes = _searchController.text.isEmpty
-              ? notes
-              : notes
-                  .where((note) =>
-                      note.title.toLowerCase().contains(
-                            _searchController.text.toLowerCase(),
-                          ))
-                  .toList();
-
-          if (filteredNotes.isEmpty) {
-            return const Center(
-              child: Text('No notes found'),
-            );
-          }
-          return Padding(
-            padding: const EdgeInsets.all(16),
-            child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-              ),
-              itemCount: filteredNotes.length,
-              itemBuilder: (context, index) {
-                final note = filteredNotes[index];
-
-                return Card(
-                  child: ListTile(
-                    title: Text(
-                      note.title,
-                      style: GoogleFonts.poppins(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    subtitle: Text(
-                      note.content,
-                      style: GoogleFonts.poppins(
-                        fontSize: 16,
-                      ),
-                    ),
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const ManageNoteScreen(),
-                        settings: RouteSettings(arguments: note),
-                      ),
-                    ),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: () {
+                showSearch(
+                  context: context,
+                  delegate: NoteSearchDelegate(
+                    Provider.of<NoteProvider>(context, listen: false),
                   ),
                 );
               },
             ),
-          );
-        },
+          ],
+          bottom: const TabBar(
+            indicatorColor: Colors.black,
+            tabs: [
+              Tab(
+                child: Text(
+                  'All Notes',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              Tab(
+                child: Text(
+                  'Folders',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.only(bottom: 16),
+          child: FloatingActionButton.extended(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ManageNoteScreen(),
+                ),
+              );
+            },
+            label: Text(
+              'Add New Note',
+              style: GoogleFonts.poppins(
+                color: Colors.white,
+                fontSize: 18,
+              ),
+            ),
+            icon: const Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+            backgroundColor: Colors.black,
+          ),
+        ),
+        body: TabBarView(
+          children: [
+            Consumer<NoteProvider>(
+              builder: (context, value, child) {
+                final notes = value.notes;
+                final filteredNotes = _searchController.text.isEmpty
+                    ? notes
+                    : notes
+                        .where((note) =>
+                            note.title.toLowerCase().contains(
+                                  _searchController.text.toLowerCase(),
+                                ))
+                        .toList();
+
+                if (filteredNotes.isEmpty) {
+                  return const Center(
+                    child: Text('No notes found'),
+                  );
+                }
+                return Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: GridView.builder(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                    ),
+                    itemCount: filteredNotes.length,
+                    itemBuilder: (context, index) {
+                      final note = filteredNotes[index];
+
+                      return Card(
+                        child: ListTile(
+                          title: Text(
+                            note.title,
+                            style: GoogleFonts.poppins(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          subtitle: Text(
+                            note.content,
+                            style: GoogleFonts.poppins(
+                              fontSize: 16,
+                            ),
+                          ),
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ManageNoteScreen(),
+                              settings: RouteSettings(arguments: note),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                );
+              },
+            ),
+            const Center(
+              child: Text('Folders'),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -232,5 +267,4 @@ class NoteSearchDelegate extends SearchDelegate {
     );
   }
 }
-
 

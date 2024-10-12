@@ -93,18 +93,23 @@ class ManageNoteScreen extends StatelessWidget {
                   return;
                 }
 
-                final newNote = Note(
-                  id: isEdit
-                    ? existingNote.id
-                    : DateTime.now().millisecondsSinceEpoch,
-                  title: title,
-                  content: content,
-                );
-
                 if (isEdit) {
-                  context.read<NoteProvider>().editNote(newNote);
+                  context.read<NoteProvider>().editNote(
+                    Note(
+                      id: existingNote.id,
+                      title: title,
+                      content: content,
+                    ),
+                  );
+                } else {
+                  context.read<NoteProvider>().addNote(
+                    Note(
+                      id: DateTime.now().millisecondsSinceEpoch,
+                      title: title,
+                      content: content,
+                    ),
+                  );
                 }
-                context.read<NoteProvider>().addNote(newNote);
 
                 Navigator.pop(context);
               },
@@ -122,4 +127,3 @@ class ManageNoteScreen extends StatelessWidget {
     );
   }
 }
-

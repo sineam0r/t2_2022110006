@@ -4,8 +4,8 @@ class Note {
   String content;
 
   Note({
-    required  this.id,
+    required this.id,
     required this.title,
-    required this.content
+    required this.content,
   });
 }
